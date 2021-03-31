@@ -1,31 +1,31 @@
-const Widget = require("../models/widget.model");
+const Widget = require("../models/widget");
 
 module.exports = {
-    index: (res, req) => {
+    index: (req, res) => {
         Widget.find()
             .then(data => res.json({ results:data }))
             .catch(err => res.status(404).json({errors:err.errors}))
     },
 
-    create: (res, req) => {
+    create: (req, res) => {
         Widget.create(req.body)
             .then(data => res.json({ results:data }))
             .catch(err => res.status(404).json({errors:err.errors}))
     },
 
-    show: (res, req) => {
+    show: (req, res) => {
         Widget.find({ _id:req.params.id })
             .then(data => res.json({ results:data }))
             .catch(err => res.status(404).json({errors:err.errors}))
     },
 
-    update: (res, req) => {
+    update: (req, res) => {
         Widget.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
             .then(data => res.json({ results:data }))
             .catch(err => res.status(404).json({errors:err.errors}))
     },
 
-    destroy: (res, req) => {
+    destroy: (req, res) => {
         Widget.deleteOne({ _id: req.params.id })
             .then(data => res.json({ results:data }))
             .catch(err => res.status(404).json({errors:err.errors}))
